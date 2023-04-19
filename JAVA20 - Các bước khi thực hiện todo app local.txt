@@ -1,0 +1,286 @@
+CM1: Initial Project
+  --> Tạo file readme.txt
+
+== Bắt đầu làm VERSION 1.0 ===
+
+* Tạo 1 BRANCH(nhánh) đại diện cho VERSION 1.0 của dự án
+* Đưa HEAD trỏ đến BRANCH mới tạo ra
+  --> git checkout commit_hash
+  --> git checkout branch_name
+  VD: git checkout todo-app-1.0
+
+  Mục đích: Khi commit 1 commit mới thì BRACNH của dự án
+  sẽ nhảy lên(chứa) commit mới
+
+  BRANCH: 'con trỏ trỏ đến commit'
+          dịch chuyển được khi HEAD -> BRANCH
+                               BRANCH -> commit
+          commit mới --> HEAD -> BRANCH
+                         BRANCH -> commit mới
+
+          có 2 cách để tạo ra BRANCH
+          + Cách 1: Tạo branch từ commit
+            --> git branch new_branch_name commit_hash
+            --> VD: git branch todo-app-1.0 348
+
+          + Cách 2: Tạo branch từ existed branch
+            * existed_branch_name trỏ đến commit là abcxyz
+            --> git branch new_branch_name existed_branch_name
+            * sẽ tạo branch tên là new_branch_name trỏ đến commit abcxyz
+            --> VD: git branch todo-app-2.0 todo-app-1.0
+
+CM2: Update version
+  --> Mở file readme.txt
+  --> Ghi nội dung là version 1.0-SNAPSHOT
+      1.0-SNAPSHOT: under development -> đang làm 1.0
+      1.0: release ra sản phẩm thực tế
+      1.0-ALPHA: Phiên bản thử nghiệm
+      1.x-BETA: Phiên bản chuẩn bị cho sản phẩm
+
+CM3: Chức năng SUM
+   + Tạo file sum.txt
+   + Code nội dung(giải lập - ko chạy)
+   + Add, Commit
+
+CM4: Chức năng SUB
+   + Tạo file sub.txt
+   + Code nội dung(giải lập - ko chạy)
+   + Add, Commit
+
+==> Khi QA, Tests test chức năng nếu bị bug
+    thì Dev tạo commits để fix bugs --> ko đổi version của dự án
+==> QA test xong hết bug --> RELEASE
+CM5: Mở file readme.txt
+     Xóa chữ SNAPSHOT
+     ==> Chạy để build dự án ra gói aritifact
+     ==> Đưa cho khách hàng
+     Lưu ý: Phiên bản đã release --> ko được sửa code trên đó nữa
+            Muốn sửa làm phiên bản mới
+== Hoàn thành VERSION 1.0 ===
+
+--> Khách hàng: TEST, kiểm tra phiên bản 1.0
+--> Phát triển: Tiếp tục làm phiên bản 2.0(tiếp tục từ 1.0)
+
+== Bắt đầu VERSION 2.0 ==
+
+* Tạo 1 BRANCH(nhánh) đại diện cho VERSION 2.0 của dự án
+  
+  ??? Tạo branch 2.0 từ chỗ nào(commit, branch nào)
+  ??- phiên bản 2.0 phát triển tiếp từ chỗ(phiên bản) nào
+  ??- phiên bản 2.0 phát triển tiếp từ phiên bản 1.0
+  --> Tạo branch 2.0 từ branch 1.0 hoặc commit của branch 1.0
+  --> git branch todo-app-2.0 abb
+  --> git branch todo-app-2.0 todo-app-1.0
+
+* Đưa HEAD trỏ đến BRANCH mới tạo ra
+  --> git checkout todo-app-2.0
+
+CM6: Update version
+  --> Mở file readme.txt
+  --> Ghi nội dung là version 2.0-SNAPSHOT
+
+CM7: Chức năng MUL
+   + Tạo file mul.txt
+   + Code nội dung(giải lập - ko chạy)
+   + Add, Commit
+
+HEAD -> todo-app-2.0
+Mong muốn: Khi release 2.0 thì 2.0 không được phép có lỗi
+đã fix ở 1.1
+Cách 1:
++ Lấy code ở 1.1 đưa vào 2.0 để đảm bảo nhánh 2.0 chức năng
+sum sub hết lỗi
+  --> Gộp nhánh 1.1 vào nhánh 2.0
+  * Gộp nhánh: merge || rebase
+  * Upmerge: Gộp released version vào development version
++ Làm tiếp chức năng của version 2.0
++ Release
+
+Cách 2:
++ Làm tiếp chức năng của version 2.0
++ Trước khi release phải gộp 1.1 vào 2.0 rồi mới release
+
+
+== Fix bugs của VERSION 1.0 --> Fix trên VERSION 1.1 ==
+* Tìm nhánh đại diện cho VERSION 1.0 --> 'todo-app-1.0'
+  --> Tìm các nhánh đã được tạo ra trong repository hiện tại 
+  --> git branch
+
+
+* Tạo branch todo-app-1.1 từ todo-app-1.0
+* Đưa HEAD trỏ đến branch todo-app-1.1
+  + Tạo commit(s) để fix bugs
+  + Tạo commit để release
+  --> Hoàn thành version 1.1
+  --> Trở về version 2.0 để làm tiếp
+  * git checkout todo-app-2.0
+
+---------------------------------------------
+
+Demo cá nhân --> chỉ 1 máy(LOCAL)
+Code của dự án sẽ lưu ở 1 máy cá nhân
+
++ Version of Project   = Local Branch
++ Task(feature || bug) = Commit
++ Version has N Tasks --> Branch has N Commits
+---> 1 người làm
+
+Demo dự án --> có N máy
+Code của dự án sẽ lưu ở máy chủ --> remote repository(github)
+
++ Version of Project = Remote Branch
++ Task(feature || bug) = Commit
++ Version has N Tasks --> Branch has N Commits
+---> N người làm
+---> Làm xong task thì phải đẩy code lên remote
+
+---------------------------------------------
+   CÁC BƯỢC KHI BẮT ĐẦU THỰC HIỆN DỰ ÁN
+---------------------------------------------
+
+
++ 1 dev tạo ra cấu trúc dự án --> local
+  workspace
+     todo-app
+        src
+        readme.txt
+
++ khởi tạo local repo
+  -> git init
+
++ tạo ra 1 remote repo(repository) để quản lý dự án
+  -> thay vì dùng lệnh bởi GIT thì github sẽ hỗ trợ
+     giao diện để mình xử lý
+  -> remote/local repository name = project name
+
+--> push(đẩy code ở local lên remote)
+  
+  -> đẩy từ local(repo) branch lên remote(repo) branch
+     + git push remote_alias local_branch_name:remote_branch_name
+     VD: git push origin master:master
+     + Đăng nhập
+       + signin with browser
+       + signin with code
+       + signin with personal access token(PAC)
+         * PAC: text(hashing) generate từ github server
+           --> tài khoản j4tdn --> pac(hcdj2bch82j219nwww92)
+         * replace for password from 2021
+
+  -> yêu cầu: local và remote repo này phải liên kết / ánh xạ với nhau
+     + local: git remote -v
+     + ánh xạ: git remote add remote_alias remote_repo_url
+              : git remote add origin https://github.com/j4tdn/todo-app
+  -> ý tưởng
+     + nếu remote branch chưa có --> tự động tạo ra remote branch mới
+     + local branch phải chứa đầy đủ tất cả commits ở remote branch
+       cộng với commit(s) mới thì mới được phép push lên
+       VD: remote branch: 1 2 5
+         : local branch : 1 2 5 6 --> push ok
+         :              : 1 3 4   --> push failed
+
+-----------------------------
+Bắt đầu VERSION 1.0 của dự án
+-----------------------------
++ Tạo BRANCH todo-app-1.0 ở remote
+  -> tạo todo-app-1.0 từ master
+  Cách 1: Dùng giao diện ở github
+  Cách 2: Tạo todo-app-1.0 ở local từ master
+          push todo-app-1.0 lên todo-app-1.0 remote
+
++ Bắt đầu thực hiện các chức năng
+  
+  * Lý thuyết: khi nhận 1 TASK cần phải xem
+    + Task đó thuộc VERSION nào của dự án -> được code/lưu trữ trên REMOTE BRANCH nào
+    + Tại LOCAL
+      --> Lấy tất cả commits mới nhất ở REMOTE BRANCH về xong làm tiếp
+
+
+  01. + Update version TODO-APP-1.0-SNAPSHOT A
+    + VERSION: 1.0 --> BRANCH: todo-app-1.0
+    + Lấy code từ remote branch todo-app-1.0 về local
+      --> git fetch [origin] [branch_name]
+      --> fetch từ remote repo về local repo cụ thể
+          fetch/đồng bộ code mới nhất từ remote branch(es) về nhánh trung gian
+      VD: remote: todo-app-1.0
+          fetch
+          local: origin/todo-app-1.0 --> readable, ko thể đưa HEAD qua nhánh trung gian
+                                     --> đồng bộ code mới nhất ở remote về local
+    + Tạo 1 nhánh từ oirgin/todo-app-1.0 để thực làm task
+    + Nhảy qua nhánh mới
+    + Thực hiện code --> push lên
+    
+    + Tổng hợp
+      --> git fetch  (origin/todo-app-1.0)
+      --> git branch jt01-update-version origin/todo-app-1.0
+      --> git checkout jt01-update-version
+      --> coding ......
+      --> add, commit
+      --> git push origin jt01-update-version:todo-app-1.0
+
+    Preview - 18.04.2023
+    --> 1.0 --> todo-app-1.0
+    --> A --> git fetch [origin] [todo-app-1.0]
+    --> đồng bộ remote branch --> nhánh trung gian --> origin/.... VD origin/todo-app-1.0
+    --> Tạo local branch từ origin/todo-app-1.0
+    --> Đưa HEAD sang --> local branch --> dùng để code 1 task của dự án
+    --> coding .... chạy ok 
+    --> add, commit
+    --> push .... local branch lên remote branch
+        + yêu cầu: local branch phải có đủ commits của remote branch
+                                   có thêm 1 || vài commits mới
+    --> push xong rồi xóa nhánh ở local  
+
+
+  02. + Tính tổng cho 2 số    : sum2.txt     B
+  --> 1.0 --> todo-app-1.0
+  --> git fetch
+      + yêu cầu: phải có local và remote repo --> liên kết/ánh xạ
+
+  + REMOTE: ==> đã có code hiện tại
+  + LOCAL : ==> nothing
+            ==> clone: copy/lấy toàn bộ (.git) ở remote về local
+
+    CLONE
+       + copy/lấy toàn bộ (.git) ở remote về local
+       + lấy dự án todo-app về local(có 1 folder tên là todo-app)
+         chứa .git giống hệt .git ở remote todo-app
+       + trong todo-app local
+         --> git sẽ tự động tạo local branch từ remote default branch
+             local branch trùng tên với remote default branch
+         --> rồi đưa HEAD sang
+         * git branch master origin/master
+         * git checkout master
+
+  git remote show origin
+  --> liệt kê nhánh nào ở local đang tracking || setup stream với nhánh ở remote
+  --> git status --> show thay đổi của mình, so sánh với nhánh tracking ở remote       
+
+
+  03. + Tính tổng cho 3 số    : sum3.txt     C  --> Thứ tự 2
+    --> local comp C
+    --> git clone url
+    --> cd todo-app
+    --> git branch t3_sum3 origin/todo-app-1.0
+    --> git checkout t3_sum3
+    --> touch sum3.txt --> notepad ... coding
+    --> git add, commit
+
+  04. + Tính hiệu cho 2 số    : sub.txt      D  --> Thứ tự 3
+    --> local comp D
+    --> git clone url
+    --> cd todo-app
+    --> git branch t4_sub origin/todo-app-1.0
+    --> git checkout t4_sub
+    --> touch sub.txt --> notepad ... coding
+    --> git add, commit
+
+  05. + Tính tích cho 2 số    : mul.txt      B   --> Thứ tự 1
+    --> git fetch
+    --> git branch t5_mul origin/todo-app-1.0
+    --> git checkout t5_mul
+    --> touch sub.txt --> notepad ... coding
+    --> git add, commit
+
+
+  06. + Tính thương cho 2 số  : div.txt      D
+  07. + Tạo ra 1 số ngẫu nhiên: random.txt   A 

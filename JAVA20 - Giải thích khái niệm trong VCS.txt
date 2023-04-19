@@ -1,0 +1,89 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+text --> thuật toán --> kết quả bị mã hóa
+
+đổi nội dung, add, commit
+
++ nội dung thay đổi sẽ được hashing và lưu vào
+
++ folder có tên là 2 chữ cái đầu tiên của commit hashing
++ file có tên là 38 kí tự còn lại
+
+A: .git: local repository
+ --> nơi lưu trữ tất cả version(commit) của dự án
+
+B: other files(except .git): working directory, thư mục làm việc
+ --> nơi để hiện thì nội dung, code của version(commit) mà HEAD đang trỏ đến
+ 
+ 
+ HEAD detached at 97302ea --> DETACH
+ 
+ 
+ Chức Năng --> Lưu lại --> Commit --> Git Version
+ 
+ VERSION OF PROJECT --> có nhiều chức năng --> có nhiều commits
+ 
+ ======================================
+ 1 GIT VERSION(HASH) = 1 COMMIT = 1 TASK
+ 
+ 1 BRANCH = 1 PROJECT VERSION = N COMMITS = N TASKS
+   + FEATURE VERSION --> COMMIT --> chức năng
+   + BUG FIX VERSION --> COMMIT --> sửa lỗi, fix bug
+
+ Quy tắc đặt tên nhánh đại diện cho phiên bản của dự án
+ + VERSION đang phát triển mới nhất 
+   --> development
+   --> hoặc là branch ứng với phiên bản của VERSION đó
+   VD: đang phát triển mới nhất là VERSION 2.0
+   --> đặt tên là development
+   --> đặt tên là project-name-number_of_version todo-app-2.0
+
+ ======================================
+ 
+ DEMO TODO-APP
+ 
+ Semactic version: A B C
+
+A: Major version
+
+B: Minor version
+
+C: Patches = Bug Fix
+
+==> App -- Shopping
+Trang Sản Phẩm
+  + Hiển thị sản phẩm
+  + Tìm kiếm ...
+  
+
+Trang Khuyến Mãi
+  + Những mặt hàng khuyến mãi từ ....
+  + Mặt hàng ít bán được
+  
+>> 1.0.0 --> release
+
+TH1: Kiểm tra app ok chưa
+  + Nếu lỗi thì sẽ fix thành version 1.0.1
+
+TH2: Đồng thời làm tiếp
+  + Chức năng mua hàng
+  + Chức năng phân trang
+  --> 1.1.0
+  
+  + Chức năng mới đăng nhập, đăng xuất, thông tin người dùng
+  --> 2.0.0
+ 
+ 
+ 
